@@ -62,6 +62,25 @@ passport.use(new GoogleStrategy(
     }
   ));
 
+const GitHubStrategy = require('passport-github').Strategy;
+
+passport.use(new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.GITHUB_CALLBACK_URL
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      User.findOrCreate(
+        { username: profile.email || profile.login },
+        (err, user) => {
+          console.log(profile);
+          cb(err, user);
+        }
+      );
+    }
+  ));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
