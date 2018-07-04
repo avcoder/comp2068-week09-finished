@@ -1,0 +1,33 @@
+<% include partials/header %>
+
+
+
+    <div class="row flex-center">
+        <div class="sm-4 col">
+
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <form method="POST" action="/add">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" class="input-block">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="publisher">Publisher</label>
+                            <input type="text" id="publisher" name="publisher" class="input-block">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imageUrl">ImageUrl</label>
+                            <input type="text" id="imageUrl" name="imageUrl" class="input-block">
+                        </div>
+
+                        <button type="submit" class="btn-secondary btn-block">Add Game</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% include partials/footer %>

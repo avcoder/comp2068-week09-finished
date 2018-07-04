@@ -1,0 +1,46 @@
+<% include partials/header %>
+    <% if (messages.length > 0) { %>
+        <div class="row flex-spaces">
+            <div class="alert alert-danger">
+                <%= messages.toString() %>
+            </div>
+        </div>
+        <% } else { %>
+            <div class="row flex-spaces">
+                <div class="alert alert-secondary">
+                    Please enter your credentials
+                </div>
+            </div>
+            <% } %>
+                <h1>
+                    <%= title %>
+                </h1>
+                <div class="row flex-center">
+                    <div class="sm-4 col">
+                        <div class="card" style="width: 20rem;">
+                            <div class="card-body">
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <label for="username">Email</label>
+                                        <input type="email" id="username" name="username" class="input-block" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" id="password" name="password" class="input-block" required>
+                                    </div>
+                                    <button type="submit" class="btn-primary btn-block">Login to my Account →</button>
+                                    <br>
+
+                                    <a href="/google">
+                                        <img src="./images/google.png" alt="Google login">
+                                    </a>
+
+                                </form>
+                            </div>
+                            <div class="card-footer">Need access?
+                                <a href="/register">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% include partials/footer %>

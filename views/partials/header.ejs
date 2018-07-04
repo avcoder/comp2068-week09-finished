@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='https://unpkg.com/papercss@1.5.1/dist/paper.min.css' />
+</head>
+
+<body style="padding: 0 1rem;">
+    <nav class="border split-nav">
+        <div class="nav-brand">
+            <h3>
+                <a href="#">RetroGames</a>
+            </h3>
+        </div>
+
+        <ul class="inline">
+            <li>
+                <a href="/games">Games</a>
+            </li>
+
+            <% if (user) { %>
+                <li>
+                    <a href="/admin">Admin</a>
+                </li>
+                <% } %>
+
+
+                    <% if (!user) { %>
+                        <li>
+                            <a href="/register">Register</a>
+                        </li>
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                        <% } %>
+
+
+                            <% if (user) { %>
+                                <li>
+                                    <a href="/logout">Logout</a>
+                                </li>
+                                <% } %>
+        </ul>
+        <% if (user) { %>
+
+
+            <span class="badge success">
+                <%= user.username %>
+            </span>
+
+
+            <% } %>
+    </nav>

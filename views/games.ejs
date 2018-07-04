@@ -1,0 +1,39 @@
+<% include partials/header %>
+  <h1>
+    <%= title %>
+  </h1>
+  <section>
+    <style scoped>
+      section {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .card {
+        margin: 1rem;
+      }
+    </style>
+    <% for (let i = 0; i < games.length; i++) { %>
+
+      <div class="card" style="width: 20rem;">
+        <img src="<%= games[i].imageUrl %>" alt="Card example image" style="height:200px;">
+
+        <div class="card-body">
+          <h4 class="card-title">
+            <%= games[i].title %>
+          </h4>
+          <h5 class="card-subtitle">
+            <%= games[i].publisher %>
+          </h5>
+          <p class="card-text">
+            <%= games[i].year %>
+          </p>
+          <a href='/playgame?game=<%= games[i].lastUrl() %>' class="paper-btn">Play</a>
+        </div>
+      </div>
+      </div>
+      <% } %>
+  </section>
+  <% include partials/footer %>
