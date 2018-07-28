@@ -62,22 +62,40 @@ passport.use(new GoogleStrategy(
     }
   ));
 
-const GitHubStrategy = require('passport-github').Strategy;
+// const GitHubStrategy = require('passport-github').Strategy;
 
-passport.use(new GitHubStrategy(
+// passport.use(new GitHubStrategy(
+//     {
+//       clientID: process.env.GITHUB_CLIENT_ID,
+//       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//       callbackURL: process.env.GITHUB_CALLBACK_URL
+//     },
+//     (accessToken, refreshToken, profile, cb) => {
+//       User.findOrCreate(
+//         { username: profile.email || profile.login },
+//         (err, user) => {
+//           console.log(profile);
+//           cb(err, user);
+//         }
+//       );
+//     }
+//   ));
+
+const WindowsLiveStrategy = require('passport-windowslive').Strategy;
+
+passport.use(new WindowsLiveStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: process.env.GITHUB_CALLBACK_URL
+      clientID: process.env.WINDOWS_LIVE_CLIENT_ID,
+      clientSecret: process.env.WINDOWS_LIVE_CLIENT_SECRET,
+      callbackURL: 'http://localhost:3000/microsoft/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
       User.findOrCreate(
-        { username: profile.email || profile.login },
-        (err, user) => {
-          console.log(profile);
-          cb(err, user);
-        }
+        { windowsliveId: profile.id, username: profile.emails[0].value },
+        (err, user) => cb(err, user)
       );
+      console.log('profile object is');
+      console.log(profile);
     }
   ));
 

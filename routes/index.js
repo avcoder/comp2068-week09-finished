@@ -2,6 +2,7 @@ const express = require('express');
 const gameController = require('../controllers/gamesController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const passport = require('passport');
 
 const router = express.Router();
 
@@ -34,7 +35,21 @@ router.get('/logout', (req, res) => {
 router.get('/google', authController.googlePre);
 router.get('/google/callback', authController.googlePost);
 
-router.get('/github', authController.githubPre);
-router.get('/github/callback', authController.githubPost);
+// router.get('/github', authController.githubPre);
+// router.get('/github/callback', authController.githubPost);
 
+router.get(
+  '/microsoft',
+  passport.authenticate('windowslive', {
+    scope: ['wl.signin', 'wl.basic', 'wl.emails'],
+  }),
+);
+router.get(
+  '/microsoft/callback',
+  passport.authenticate('windowslive', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/admin');
+  },
+);
 module.exports = router;
